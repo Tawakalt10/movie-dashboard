@@ -5,7 +5,34 @@ import styles from '@/styles/Home.module.css'
 
 const inter = Inter({ subsets: ['latin'] })
 
-export default function Home() {
+
+const APIKEY =
+  "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJiMzdkYmRhNTNkMDFmYTAzZjgwZmUxNWU4OTNjOThhMiIsInN1YiI6IjY1MDVmMmYxNWFhZGM0MDEzYmJlYmE5NyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.AfxhPcPfgC8DyBJIsxAOrDGoz0vZUW26oDLLg8MZTWI";
+const baseUrl = "https://api.themoviedb.org/3/discover/movie";
+
+const fetchMovieData = async () => {
+  try {
+    const res = await axios.get(baseUrl, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${APIKEY}`,
+      },
+    });
+    return res.data.results;
+  } catch (error) {
+    console.log("Error in fetching data");
+  }
+};
+
+export const getStaticProps = async () => {
+  const movies = await fetchMovieData();
+  return {
+    props: { movies },
+  };
+};
+
+export default function Home({movies}) {
+  const baseImageUrl = "https://image.tmdb.org/t/p/w500";
   return (
     <>
       <Head>
@@ -14,101 +41,181 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className={`${styles.main} ${inter.className}`}>
-        <div className={styles.description}>
-          <p>
-            Get started by editing&nbsp;
-            <code className={styles.code}>src/pages/index.js</code>
+
+
+
+          <div className={styles.container}>
+      <div className={styles.homePage}>
+        <div className={styles.movieBox}>
+          <img src="/images/tv.png" />
+          <h4 className={styles.movieBoxPara}>MovieBox</h4>
+          <input type="text" placeholder="What do you want to search" />
+          <i class="bx bx-search"></i>
+          <p>Sign In</p>
+        </div>
+
+        <div className={styles.details}>
+          <h4 className={styles.johnHeading}>John Wick 3: <br />Parabellum</h4>
+
+          <p className={styles.johnPara}>
+            John Wick is on the run after killing a member <br />of the
+            international assassins' guild, and with <br />a $14 million price
+            tag on his head, he is <br />the target of hit men and women
+            everywhere.
           </p>
-          <div>
-            <a
-              href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              By{' '}
-              <Image
-                src="/vercel.svg"
-                alt="Vercel Logo"
-                className={styles.vercelLogo}
-                width={100}
-                height={24}
-                priority
-              />
-            </a>
+          <button className={styles.watchBtn}>
+            <i class="bx bx-play-circle"></i>Watch Trailer
+          </button>
+        </div>
+      </div>
+
+      <div className={styles.mainContent}>
+        <h4 className={styles.featuredMovie}>Featured Movie</h4>
+
+        <div className={styles.movieDetailsContainer}>
+          <div className={styles.movieDetailsCard} data-testid="movie-card">
+            <div data-testid="movie-poster">
+              <img src="/images/Poster Image -1.jpg" />
+            </div>
+            <p className={styles.date} data-testid="movie-release-date">
+              USA, 2016-Current
+            </p>
+            <h4 className={styles.title}data-testid="movie-title" >Stranger Things</h4>
+            <p className={styles.ratings}>8.60/100</p>
+            <p className ={styles.movieType} data-testid="movie-type" c>
+              Action, Adventure, Horror
+            </p>
+          </div>
+
+          <div className={styles.movieDetailsCard} data-testid="movie-card">
+            <div data-testid="movie-poster">
+              <img src="/images/Poster Image-2.jpg" />
+            </div>
+
+            <p className={styles.date} data-testid="movie-release-date">USA, 2005</p>
+            <h4 data-testid="movie-title" className={styles.title}>Batman Begins</h4>
+            <p className={styles.ratings}>86.0/100</p>
+            <p className={styles.movieType}>Action, Adventure</p>
+          </div>
+
+          <div className={styles.movieDetailsCard} data-testid="movie-card">
+            <div data-testid="movie-poster">
+              <img src="/images/Poster Image-3.jpg" />
+            </div>
+
+            <p className={styles.date} data-testid="movie-release-date">USA, 2017</p>
+            <h4 data-testid="movie-title" className={styles.title}>Dunkirk</h4>
+            <p className={styles.ratings}>78.0/100</p>
+            <p className ={styles.movieType}>Action, Drama, History</p>
+          </div>
+
+          <div className={styles.movieDetailsCard} data-testid="movie-card">
+            <div data-testid="movie-poster">
+              <img src="/images/Poster Image-4.png" />
+            </div>
+
+            <p className={styles.date} data-testid="movie-release-date">USA, 2018</p>
+            <h4 data-testid="movie-title" className={styles.title}>
+              Spider-Man: Into The Spider Verse
+            </h4>
+            <p className={styles.ratings}>84.0/100</p>
+            <p className ={styles.movieType}>Animation, Action, Adventure</p>
+          </div>
+
+          <div className={styles.movieDetailsCard} data-testid="movie-card">
+            <div data-testid="movie-poster">
+              <img src="/images/Poster-5.jpg" />
+            </div>
+
+            <p className={styles.date} data-testid="movie-release-date">USA, 2021</p>
+            <h4 data-testid="movie-title" classNamee={styles.title}>Dune</h4>
+            <p className={styles.ratings}>84.0/100</p>
+            <p className={styles.movieType}>Action, Adventure, Drama</p>
+          </div>
+
+          <div className={styles.movieDetailsCard} data-testid="movie-card">
+            <div data-testid="movie-poster">
+              <img src="/images/Poster-6.jpg" />
+            </div>
+
+            <p className={styles.date} data-testid="movie-release-date">USA, 2021</p>
+            <h4 data-testid="movie-title" className={styles.title}>No Time To Die</h4>
+            <p className={styles.ratings}>76.0/100</p>
+            <p className={styles.movieType}>Action, Adventure, Thriller</p>
+          </div>
+
+          <div className={styles.movieDetailsCard}data-testid="movie-card">
+            <div data-testid="movie-poster">
+              <img src="/images/Poster-7.jpg" />
+            </div>
+
+            <p className={styles.date} data-testid="movie-release-date">USA, 2021</p>
+            <h4 data-testid="movie-title" class="title">
+              Shang-Chi and the Legend of the Ten Rings
+            </h4>
+            <p className={styles.ratings}>79.0/100</p>
+            <p className={styles.movieType}>Action, Adventure, Fantasy</p>
+          </div>
+
+          <div className={styles.movieDetailsCard} data-testid="movie-card">
+            <div data-testid="movie-poster">
+              <img src="/images/Poster-8.jpg" />
+            </div>
+
+            <p className={styles.date} data-testid="movie-release-date">USA, 2021</p>
+            <h4 data-testid="movie-title" className= {styles.title}>Don't Breathe</h4>
+            <p className={styles.ratings}>61.0/100</p>
+            <p className= {styles.movieType}>Action, Drama, Horror</p>
           </div>
         </div>
+      </div>
 
-        <div className={styles.center}>
-          <Image
-            className={styles.logo}
-            src="/next.svg"
-            alt="Next.js Logo"
-            width={180}
-            height={37}
-            priority
-          />
+              <div className={styles.mainContainer}>
+          {movies.map(
+            ({
+              id,
+              title,
+              backdrop_path,
+              release_date,
+              vote_average,
+              overview,
+            }) => {
+              const img = `${baseImageUrl}${backdrop_path}`;
+              return (
+                <div key={id} className={styles.cardContainer}>
+                  <Image
+                    alt="movie image"
+                    src={img}
+                    width={300}
+                    height={300}
+                    className={styles.image}
+                  />
+                  <h1 className={styles.title}>Title: {title}</h1>
+                  <p>Released Date:{release_date}</p>
+                  <p>Overview - {overview.slice(10, 40)}...</p>
+                  <p>Rating: {vote_average}</p>
+                </div>
+              );
+            }
+          )}
         </div>
 
-        <div className={styles.grid}>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2>
-              Docs <span>-&gt;</span>
-            </h2>
-            <p>
-              Find in-depth information about Next.js features and&nbsp;API.
-            </p>
-          </a>
-
-          <a
-            href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2>
-              Learn <span>-&gt;</span>
-            </h2>
-            <p>
-              Learn about Next.js in an interactive course with&nbsp;quizzes!
-            </p>
-          </a>
-
-          <a
-            href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2>
-              Templates <span>-&gt;</span>
-            </h2>
-            <p>
-              Discover and deploy boilerplate example Next.js&nbsp;projects.
-            </p>
-          </a>
-
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2>
-              Deploy <span>-&gt;</span>
-            </h2>
-            <p>
-              Instantly deploy your Next.js site to a shareable URL
-              with&nbsp;Vercel.
-            </p>
-          </a>
+      <div className={styles.footer}>
+        <div class="footer-icon">
+          <i className="bx bxl-facebook"></i>
+          <i className="bx bxl-instagram"></i>
+          <i className="bx bxl-twitter"></i>
+          <i className="bx bxl-youtube"></i>
         </div>
-      </main>
+
+        <div className={styles.footerPara}>
+          <h4 className={styles.foooterCondition}>Conditions of Use</h4>
+          <h4 className={styles.footerPrivacy}>Privacy and Policy</h4>
+          <h4 className={styles.footerPress}>Press Room</h4>
+        </div>
+        <p className= {styles.copyRight}>© 2021 MovieBox by Adriana Eka Prayudha</p>
+      </div>
+    </div>
     </>
   )
 }
