@@ -46,12 +46,12 @@ export default function Home({movies}) {
       <div className={styles.homePage}>
         <div className={styles.movieBox}>
           <Image
-           src="/images/tv.png" 
+           src="/tv.png" 
            alt='poster-icon'
-           width={120}
-           height={100}
+           width={50}
+           height={50}
            />
-          <h4 className={styles.movieBoxPara}>MovieBox</h4>
+          <h4 className={styles.movieBoxPara}>Movie Box</h4>
           <input type="text" placeholder="What do you want to search" />
           <i class="bx bx-search"></i>
           <p>Sign In</p>

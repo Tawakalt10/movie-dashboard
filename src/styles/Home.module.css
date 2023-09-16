@@ -32,15 +32,12 @@
 
 .movieBox{
 display: flex;
-justify-self: center;
-align-items: center;
+justify-content: space-around;
+align-items: s;
 margin-left: 3rem;
 padding-top: 1rem;
 }
 
-.movieBoxPara{
-    margin-left: 1rem;
-}
 
 .johnHeading{
    font-size: 48px;
