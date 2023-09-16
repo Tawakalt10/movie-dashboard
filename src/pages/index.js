@@ -2,9 +2,8 @@ import Head from 'next/head'
 import Image from 'next/image'
 import { Inter } from 'next/font/google'
 import styles from '@/styles/Home.module.css'
-
+import axios from "axios";
 const inter = Inter({ subsets: ['latin'] })
-
 
 const APIKEY =
   "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJiMzdkYmRhNTNkMDFmYTAzZjgwZmUxNWU4OTNjOThhMiIsInN1YiI6IjY1MDVmMmYxNWFhZGM0MDEzYmJlYmE5NyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.AfxhPcPfgC8DyBJIsxAOrDGoz0vZUW26oDLLg8MZTWI";
@@ -43,7 +42,6 @@ export default function Home({movies}) {
       </Head>
 
 
-
           <div className={styles.container}>
       <div className={styles.homePage}>
         <div className={styles.movieBox}>
@@ -69,13 +67,18 @@ export default function Home({movies}) {
         </div>
       </div>
 
-      <div className={styles.mainContent}>
+      {/* <div className={styles.mainContent}>
         <h4 className={styles.featuredMovie}>Featured Movie</h4>
 
         <div className={styles.movieDetailsContainer}>
           <div className={styles.movieDetailsCard} data-testid="movie-card">
             <div data-testid="movie-poster">
-              <img src="/images/Poster Image -1.jpg" />
+              <Image
+              src="/images/Poster.jpg"
+              alt="poster image"
+              width={500}
+              height={500}
+            />
             </div>
             <p className={styles.date} data-testid="movie-release-date">
               USA, 2016-Current
@@ -168,9 +171,9 @@ export default function Home({movies}) {
             <p className= {styles.movieType}>Action, Drama, Horror</p>
           </div>
         </div>
-      </div>
+      </div> */}
 
-              <div className={styles.mainContainer}>
+      <div className={styles.mainContainer}>
           {movies.map(
             ({
               id,
@@ -182,7 +185,7 @@ export default function Home({movies}) {
             }) => {
               const img = `${baseImageUrl}${backdrop_path}`;
               return (
-                <div key={id} className={styles.cardContainer}>
+                <div key={id} className={styles.cardContainer} >
                   <Image
                     alt="movie image"
                     src={img}
@@ -190,9 +193,9 @@ export default function Home({movies}) {
                     height={300}
                     className={styles.image}
                   />
-                  <h1 className={styles.title}>Title: {title}</h1>
-                  <p>Released Date:{release_date}</p>
-                  <p>Overview - {overview.slice(10, 40)}...</p>
+                  <h1 className={styles.title} data-testid="movie-title">Title: {title}</h1>
+                  <p data-testid="movie-release-date">Released Date:{release_date}</p>
+                  <p data-testid="movie-overview">Overview - {overview.slice(10, 40)}...</p>
                   <p>Rating: {vote_average}</p>
                 </div>
               );
